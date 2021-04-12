@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="stylesheets/tasks.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+</head>
+<body>
+    <div class="main-container">
+        <div class="container">
+            <div class="row justify-content-center align-items-center mt-2">
+                <div class="col-6">
+                    <p>Task List</p>
+                </div>
+                <div>
+                    <button class="btn btn-primary" onclick="openNewTaskModal()">Add Task</button>
+                </div>
+                <div class="ml-2">
+                    <button class="btn btn-danger" onclick="disconnect()">Disconnect</button>
+                </div>
+            </div>
+            <div class="row align-items-center mt-3">
+                <div class="col-4">
+                    <div class="list-group taskList" role="tablist" id="tasksList">
+
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="tab-content commentList" id="commentList">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+<!--Add task Modal-->
+<div
+    class="modal fade"
+    id="addtaskModal"
+    tabindex="-1"
+    aria-labelledby="addtaskModal"
+    aria-hidden="true"
+>
+    <div class="modal-dialog">
+
+        <form onsubmit="addTask(event)">
+            <input id="newTaskUserID" name="userId" hidden>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addtask">Add Task</h5>
+                    <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                    >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row mt-3 mb-2">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="taskTitle">Task Title</label>
+                                <input type="text" name="title" class="form-control" id="taskTitle" aria-describedby="taskTitleHelp" placeholder="Title">
+                                <small id="taskTitleHelp" class="form-text text-muted">A title for your task</small>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="taskText">Task Title</label>
+                                <textarea class="form-control" name="text"  id="taskText" aria-describedby="taskTextHelp" placeholder="Text"></textarea>
+                                <small id="taskTextHelp" class="form-text text-muted">the text for your task</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        Close
+                    </button>
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        Add Task
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<!--Add comment modal-->
+<div
+    class="modal fade"
+    id="addCommentModal"
+    tabindex="-1"
+    aria-labelledby="addCommentModal"
+    aria-hidden="true"
+>
+    <div class="modal-dialog">
+
+        <form onsubmit="addComment(event)">
+            <input id="commentUserId" name="userId" hidden>
+            <input id="commentTaskIdId" name="taskId" hidden>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addtask">Add Comment</h5>
+                    <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                    >
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row mt-3 mb-2">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="commentTitle">Comment Title</label>
+                                <input type="text" name="title" class="form-control" id="commentTitle" aria-describedby="commentTitlehelp" placeholder="Title">
+                                <small id="commentTitlehelp" class="form-text text-muted">A title for your Comment</small>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="commentText">Comment Title</label>
+                                <textarea class="form-control" name="text"  id="commentText" aria-describedby="commentTextHelp" placeholder="Text"></textarea>
+                                <small id="commentTextHelp" class="form-text text-muted">the text for your Comment</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                        Close
+                    </button>
+                    <button
+                        type="submit"
+                        class="btn btn-primary"
+                    >
+                        Add Comment
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="js/tasks.js"></script>
+<script>
+</script>
+</html>
