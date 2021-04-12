@@ -16,12 +16,20 @@ you will need to have installed on your system :
 - Docker
 - docker-compose 
 
+before launching :
+
+- You should change the local database volume that acts as a physical storage
+for the mongodb. you can do this by editing the `docker-compose.yml` and changing the default 
+directory "/Users/mac/mongodb/database" to a writable directory on your testing machine. 
+ 
 to launch : 
 
 ```bash
 $ cd todoListBackEndServer
 $ docker-compose up
 ```
+
+once both containers are up and running, 
 
 #### Traditional install and run
 
