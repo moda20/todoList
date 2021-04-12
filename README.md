@@ -29,7 +29,9 @@ $ cd todoListBackEndServer
 $ docker-compose up
 ```
 
-once both containers are up and running, 
+once both containers are up and running, you can head to the default url `http://localhost:3004/auth` in order to login or
+create a new account via the register form. 
+(After registering you will need to manually login with the new credentials)
 
 #### Traditional install and run
 
